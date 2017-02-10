@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestCalculator;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace UnitTestCalculatorMy
 {
@@ -120,6 +121,151 @@ namespace UnitTestCalculatorMy
             StringAssert.EndsWith(str_1, "Mike");
         }
 
+        //Test collection -------------------------------
 
+        [TestMethod]
+        public void TestCollection()
+        {
+            List<string> List_of_str = new List<string>();
+
+            List_of_str.Add("Ivanov");
+            List_of_str.Add("Petriv");
+            List_of_str.Add("asdfhda");
+            string x = "some text";
+
+            CollectionAssert.AllItemsAreInstancesOfType(List_of_str, x.GetType());
+        }
+
+
+        [TestMethod]
+        public void TestCollectionClass()
+        {
+            List<object> List_of_obj = new List<object>();
+
+            List_of_obj.Add("Ivanov");
+            List_of_obj.Add("Petriv");
+            List_of_obj.Add("asdfhda");
+            List_of_obj.Add(123);
+
+            string x = "some text";
+
+
+
+            CollectionAssert.AllItemsAreInstancesOfType(List_of_obj, x.GetType());
+        }
+
+        [TestMethod]
+        public void TestCollectionMyElements()
+        {
+            List<My_Element> List_of_obj = new List<My_Element>();
+
+            My_Element element_1 = new My_Element();
+            My_Element element_2 = new My_Element();
+            My_Element element_3 = new My_Element();
+
+            List_of_obj.Add(element_1);
+            List_of_obj.Add(element_2);
+            List_of_obj.Add(element_3);
+
+
+
+            CollectionAssert.AllItemsAreInstancesOfType(List_of_obj, element_1.GetType());
+        }
+
+        [TestMethod]
+        public void TestCollectionMyElementsExist()
+        {
+            List<My_Element> List_of_obj = new List<My_Element>();
+
+            My_Element element_1 = new My_Element();
+            My_Element element_2 = new My_Element();
+            My_Element element_3 = new My_Element();
+
+            My_Element element_4 = null;
+
+            List_of_obj.Add(element_1);
+            List_of_obj.Add(element_2);
+            List_of_obj.Add(element_3);
+            List_of_obj.Add(element_4);
+
+
+
+
+            CollectionAssert.AllItemsAreNotNull(List_of_obj);
+        }
+
+        [TestMethod]
+        public void TestCollectionUniqu()
+        {
+            List<string> List_of_str = new List<string>();
+
+            List_of_str.Add("Ivanov");
+            List_of_str.Add("Petriv");
+            List_of_str.Add("ivanov");
+
+
+            CollectionAssert.AllItemsAreUnique(List_of_str);
+        }
+
+        [TestMethod]
+        public void TestCollectionEqualTo()
+        {
+            List<string> List_of_str = new List<string>();
+
+            List_of_str.Add("Ivanov");
+            List_of_str.Add("Petriv");
+            List_of_str.Add("ivanov");
+            List_of_str.Add("Adfjd");
+            List<string> List_of_str_exp = new List<string>();
+
+            List_of_str_exp.Add("Ivanov");
+            List_of_str_exp.Add("Petriv");
+            List_of_str_exp.Add("ivanov");
+            List_of_str_exp.Add("Adfjd");
+
+            CollectionAssert.AreEquivalent(List_of_str,List_of_str_exp);
+        }
+
+        [TestMethod]
+        public void TestCollectionEqualToOrder()
+        {
+            List<string> List_of_str = new List<string>();
+
+
+            List_of_str.Add("Adfjd");
+            List_of_str.Add("Ivanov");
+            List_of_str.Add("Petriv");
+            List_of_str.Add("ivanov");
+            
+            List<string> List_of_str_exp = new List<string>();
+
+            List_of_str_exp.Add("Ivanov");
+            List_of_str_exp.Add("Petriv");
+            List_of_str_exp.Add("ivanov");
+            List_of_str_exp.Add("Adfjd");
+
+            CollectionAssert.AreEqual(List_of_str, List_of_str_exp);
+        }
+        [TestMethod]
+        public void TestCollectionSubSet()
+        {
+            List<string> List_of_str = new List<string>();
+
+
+            List_of_str.Add("Adfjd");
+            List_of_str.Add("Ivanov");
+            List_of_str.Add("Petriv");
+            List_of_str.Add("ivanov");
+            List_of_str.Add("audfiad");
+
+            List<string> List_of_str_sub = new List<string>();
+
+            List_of_str_sub.Add("Ivanov");
+            List_of_str_sub.Add("Petriv");
+            List_of_str_sub.Add("ivanov");
+            List_of_str_sub.Add("Adasdffjd");
+
+            CollectionAssert.IsSubsetOf(List_of_str_sub,List_of_str);
+        }
     }
 }
