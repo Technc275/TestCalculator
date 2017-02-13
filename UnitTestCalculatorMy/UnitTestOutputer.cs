@@ -12,15 +12,16 @@ namespace UnitTestCalculatorMy
     {
         // private variables
         private Calculator calculator_for_test; // reference on trash
-      
+
 
         [TestInitialize]
-        public void TestInitialize() {
+        public void TestInitialize()
+        {
 
             // create calculator instanse
             //Calculator calculator_for_test = new Calculator(); local
 
-            this.calculator_for_test   = new Calculator(); // this.calculator_for_test   reference on real data
+            this.calculator_for_test = new Calculator(); // this.calculator_for_test   reference on real data
 
             Debug.WriteLine("Calculator created");
 
@@ -29,10 +30,11 @@ namespace UnitTestCalculatorMy
 
         // final action after test
         [TestCleanup]
-        public void TestCleanup() {
+        public void TestCleanup()
+        {
 
             Debug.WriteLine("All test finished");
-           // this.calculator_for_test.Dispose(); error in calculator cannot free memory
+            // this.calculator_for_test.Dispose(); error in calculator cannot free memory
         }
 
 
@@ -103,8 +105,8 @@ namespace UnitTestCalculatorMy
             string str_1 = "Hell1o aaabbbb223 Mike";
 
             string str_2 = "1Hello Mike";
-           
-   
+
+
 
             StringAssert.StartsWith(str_1, "Hello");
         }
@@ -116,7 +118,7 @@ namespace UnitTestCalculatorMy
             string str_1 = "Hell1o aaabbbb223 Mike";
 
             string str_2 = "1Hello Mike";
-    
+
 
             StringAssert.EndsWith(str_1, "Mike");
         }
@@ -223,7 +225,7 @@ namespace UnitTestCalculatorMy
             List_of_str_exp.Add("ivanov");
             List_of_str_exp.Add("Adfjd");
 
-            CollectionAssert.AreEquivalent(List_of_str,List_of_str_exp);
+            CollectionAssert.AreEquivalent(List_of_str, List_of_str_exp);
         }
 
         [TestMethod]
@@ -236,7 +238,7 @@ namespace UnitTestCalculatorMy
             List_of_str.Add("Ivanov");
             List_of_str.Add("Petriv");
             List_of_str.Add("ivanov");
-            
+
             List<string> List_of_str_exp = new List<string>();
 
             List_of_str_exp.Add("Ivanov");
@@ -265,7 +267,49 @@ namespace UnitTestCalculatorMy
             List_of_str_sub.Add("ivanov");
             List_of_str_sub.Add("Adasdffjd");
 
-            CollectionAssert.IsSubsetOf(List_of_str_sub,List_of_str);
+            CollectionAssert.IsSubsetOf(List_of_str_sub, List_of_str);
         }
+
+        [TestMethod]
+        public void HomeWork()
+        {
+
+            My_Element element_1 = new My_Element();
+            element_1.data = -12;
+            element_1.phone_number = "097-12-12";
+            element_1.info = "Hello Mike";
+
+
+            My_Element element_2 = new My_Element();
+
+            element_2.data = 122;
+            element_2.phone_number = "091-12-32";
+            element_2.info = "Hello Joe";
+
+
+            My_Element element_3 = new My_Element();
+
+            element_3.data = 12212341;
+            element_3.phone_number = "044-12-32";
+            element_3.info = "Hello Abrasha";
+
+
+            List<Object> my_super_list = new List<object>();
+
+            my_super_list.Add(24);
+            my_super_list.Add(null);
+            my_super_list.Add(element_1);
+            my_super_list.Add("Hello");
+            my_super_list.Add(element_2);
+
+
+            //phone 050 097 operators?
+            //in info Hello....
+            // data>0 and data <100
+            //all element was not null and unique
+            StringAssert.StartsWith(element_1.info, "Hello");
+
+        }
+
     }
 }
